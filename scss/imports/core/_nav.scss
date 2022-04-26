@@ -1,0 +1,44 @@
+// css navigator (Menu)
+.nav__mobile {
+    position: fixed;
+    background-color: $navmb-cl;
+    right: 0;
+    top: $header-height;
+    bottom: 0;
+    width: 100%;
+    z-index: 10;
+    @include visible(0);
+    @include mid(true);
+    transition: translateX(100%) 2s ease-in-out;
+    &--list {
+        width: 100%;
+        @include mid(false);
+        a {
+            width: 100%;
+            @include mid(true);
+            @include text(15px, pb, 22.5px, $white-cl, uppercase);
+            text-decoration: none;
+            padding: 15px 0;
+            letter-spacing: 0.375px;
+        }
+    }
+    @include xs {
+        &.active {
+            @include visible(1);
+            transition: translateX(0%);
+        }
+    }
+    // @include keyframes(fadeX)
+    // {
+    //     from
+    //     {
+    //         @include transform(translateX(100%));
+
+    //     }
+    //     to
+    //     {
+    //         @include transform(translateX(0%));
+
+    //     }
+    // }
+}

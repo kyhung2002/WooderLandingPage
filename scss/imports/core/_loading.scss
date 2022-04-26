@@ -1,0 +1,74 @@
+// css loading
+.main-loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $black-cl;
+    z-index: 800;
+    display: block;
+}
+.loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 800;
+    transform: translate(-50%, -50%);
+    .text {
+        color: $gold-cl;
+        display: inline-block;
+        margin-top: 40px;
+        font-size: 20px;
+        font-family: pb;
+        letter-spacing: 4px;
+        @include xs {
+            font-size: 14px;
+        }
+    }
+}
+
+.bounceball {
+    position: relative;
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    @include xs {
+        margin-bottom: 8px;
+    }
+    &:before {
+        position: absolute;
+        content: "";
+        display: block;
+        top: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: $gold-cl;
+        transform-origin: 50%;
+        animation: bounce 500ms alternate infinite ease;
+    }
+    // @include
+}
+
+@keyframes bounce {
+    0% {
+        top: 40px;
+        height: 5px;
+        border-radius: 60px 60px 20px 20px;
+        transform: scaleX(2);
+    }
+    35% {
+        height: 40px;
+        border-radius: 50%;
+        transform: scaleX(1);
+    }
+    100% {
+        top: 0;
+    }
+}

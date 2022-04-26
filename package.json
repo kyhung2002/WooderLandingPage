@@ -1,0 +1,23 @@
+{
+  "name": "Wooder",
+  "version": "3.0.0",
+  "description": "This is my first Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "task"
+  ],
+  "author": "Tran Ky Hung",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^1.5.2",
+    "grunt-browser-sync": "^2.2.0",
+    "grunt-contrib-cssmin": "^3.0.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-uglify": "^5.0.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "load-grunt-tasks": "^5.1.0"
+  }
+}

@@ -1,0 +1,795 @@
+// Slider
+.slider {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    &__top {
+        height: 100%;
+    }
+    &__item {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        &--content {
+            @include mid(false);
+            width: 100%;
+        }
+        &--heading {
+            @include text(var(--slider-heading), pb, var(--slider-headinglh), $gold-cl, uppercase);
+            letter-spacing: var(--slider-lb);
+            text-align: center;
+        }
+        &--button {
+            @include button(48px);
+            @include text(14px, pb, 0, $white-cl, uppercase);
+            letter-spacing: 2.8px;
+            margin: 38px auto 0 auto;
+            position: relative;
+            &:after {
+                @include fakediv(100%, 100%, $gold-rgba-cl, true);
+                z-index: -1;
+                @include transform(scaleX(0));
+                @include transition($t);
+            }
+            &:hover::after {
+                @include transform(scaleX(1));
+            }
+        }
+        .arrowicon--right {
+            margin-left: 15px;
+        }
+        &--img {
+            width: 100%;
+            height: 100%;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+    &__bottom {
+        position: absolute;
+        bottom: 30px;
+        left: 0;
+        right: 0;
+        .container-fluid {
+            @include flexset(true);
+        }
+        &--left {
+            @include flexnomid;
+        }
+        &--number {
+            @include text(42px, pb, 0, $gold-cl, uppercase);
+            @include flexnomid;
+            &::before {
+                @include fakediv(42px, 2px, $gold-cl, false);
+                margin-right: 15px;
+            }
+        }
+        .list-dots {
+            @include flexnomid;
+            margin-left: 10px;
+            .dot {
+                @include transition($t);
+                height: 10px;
+                width: 10px;
+                background-color: $white-cl;
+                margin-left: 10px;
+                cursor: pointer;
+                border-radius: 50%;
+                &.active {
+                    background-color: $gold-cl;
+                    @include transition($t);
+                }
+            }
+        }
+        &--middle {
+            @include midX;
+            @include mid(true);
+            bottom: 3px;
+            flex-direction: column;
+            .arrow__long {
+                margin-top: 10px;
+                animation: fadeDown linear 1.2s infinite;
+            }
+            @include keyframes(fadeDown) {
+                from {
+                    opacity: 0;
+                    transform: translateY(0);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(20px);
+                }
+            }
+        }
+        &--right {
+            @include flexnomid;
+            .slide__btn {
+                @include transition($t);
+                @include button(15px);
+                &:hover {
+                    background-color: $gold-cl;
+                }
+                &.--next {
+                    @include transform(rotate(180deg));
+                }
+            }
+        }
+    }
+    @include md {
+        .slider__item--heading {
+            font-size: 58px;
+            letter-spacing: 8px;
+        }
+    }
+    @include sm {
+        .slider__bottom--middle,
+        .slider__bottom--right {
+            @include visible(0);
+        }
+        .slider__item--heading {
+            font-size: 50px;
+            letter-spacing: 8px;
+        }
+    }
+    @include xs {
+        height: 80vh;
+        .slider__item--heading {
+            font-size: var(--slider-heading-mb);
+            letter-spacing: var(--slider-lb-mb);
+        }
+        .slider__bottom--middle,
+        .slider__bottom--right {
+            @include visible(0);
+        }
+        .gallery__list {
+            grid-template-rows: 150px 150px;
+        }
+    }
+}
+// End Slider
+//----------------------------- //
+//Product
+.product {
+    &__item {
+        overflow: hidden;
+        @include flexset(true);
+        &:not(:last-child) {
+            margin-bottom: 94px;
+        }
+        &:nth-child(even) {
+            flex-direction: row-reverse;
+            .product__item--footer {
+                flex-direction: row-reverse;
+            }
+            .product__item--name::before {
+                left: calc(100% + 20px);
+                right: unset;
+            }
+            .product__item--desc {
+                padding-right: 0;
+            }
+        }
+        &--left {
+            flex-basis: 50%;
+            padding-left: 96px;
+            padding-right: 62px;
+        }
+        &--name {
+            position: relative;
+            &::before {
+                @include fakediv(82px, 2px, $black-cl, true);
+                @include transform(translateY(-50%));
+                right: calc(100% + 20px);
+                top: 50%;
+            }
+        }
+        &--desc {
+            @include overtext(3);
+            padding-right: 40px;
+        }
+        &--right {
+            flex-basis: 514px;
+            flex-shrink: 0;
+            .product__img {
+                width: 100%;
+                object-fit: cover;
+            }
+        }
+        &--footer {
+            @include flexnomid;
+        }
+    }
+    @include sm {
+        padding-top: var(--pd-section-m);
+        padding-bottom: var(--pd-section-m);
+        &__item {
+            flex-direction: column-reverse;
+            align-items: unset;
+            &:nth-child(even) {
+                flex-direction: column-reverse;
+                .product__item--desc {
+                    padding-right: 0;
+                    padding-left: 40px;
+                }
+            }
+            &--left {
+                padding: 0;
+                flex-basis: 0;
+                margin-top: 60px;
+            }
+            &--name::before {
+                display: none;
+            }
+
+            &--right {
+                max-width: 100%;
+                flex-basis: 0;
+            }
+        }
+    }
+    @include xs {
+        &__item {
+            &--left {
+                padding: 0;
+                flex-basis: 0;
+                margin-top: 30px;
+            }
+        }
+    }
+}
+
+// End Product
+//----------------------------- //
+//Video
+.video {
+    .container {
+    }
+    &__title {
+        text-align: center;
+        line-height: 43px;
+        margin-bottom: 40px;
+        position: relative;
+
+        &::after {
+            @include fakediv(38px, 3px, $gold-cl, false);
+            @include midX;
+            margin-top: 10px;
+        }
+    }
+    &__desc {
+        max-width: 465px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    &__list {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 55px;
+    }
+    &__package {
+        width: 200px;
+        height: 200px;
+        border: 10px solid $white-cl;
+        border-radius: 50%;
+        overflow: hidden;
+        -webkit-box-shadow: 0px 0px 0px 1px #cfcfcf;
+        box-shadow: 0px 0px 0px 1px #cfcfcf;
+        position: relative;
+        box-sizing: content-box;
+        cursor: pointer;
+        &::after {
+            @include fakediv(28%, 28%, $gold-cl, true);
+            border-radius: 50%;
+            @include mid(false);
+        }
+
+        &:hover .video__img {
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+        &:hover .play-icon {
+            transform: translate(-50%, -50%) rotate(720deg);
+        }
+    }
+    &__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        @include mid(false);
+        @include transition($t);
+    }
+    .play-icon {
+        @include transition($t);
+        @include mid(false);
+        z-index: 1;
+    }
+    &--footer {
+        @include text(16px, pr, unset, $black-cl, unset);
+        text-align: center;
+        margin-top: 45px;
+        position: relative;
+        &::before {
+            @include fakediv(20px, 2px, $gold-cl, true);
+            left: 50%;
+            bottom: calc(100% + 20px);
+            @include transform(translateX(-50%));
+        }
+    }
+    @include sm {
+        padding-bottom: var(--padding-bottom-m);
+        &__list {
+            flex-direction: column;
+        }
+        &__item:not(:first-child) {
+            margin-top: 40px;
+        }
+    }
+}
+// End video
+//----------------------------- //
+// main Video
+.main__video {
+    padding: 185px 0;
+    background: url("../img/video-main.jpg") center/cover no-repeat;
+    position: relative;
+    &:after {
+        @include fakediv(100%, 100%, rgba(0, 0, 0, 0.75), true);
+        bottom: 0;
+    }
+    &--content {
+        position: relative;
+        z-index: 2;
+    }
+    .section__title--left {
+        color: $gold-cl;
+    }
+    .section__desc--left {
+        color: $white-cl;
+    }
+    .watch-button {
+        @include button(54px);
+        @include text(12px, pb, 0, $white-cl, uppercase);
+        letter-spacing: 2.4px;
+        background-color: transparent;
+        margin-top: 48px;
+        cursor: pointer;
+        position: relative;
+
+        &:after {
+            @include fakediv(0%, 100%, $gold-rgba-cl, true);
+            @include transition($t);
+            z-index: -1;
+        }
+        &:hover::after {
+            width: 100%;
+        }
+    }
+    .playcircle__icon {
+        margin-right: 12px;
+    }
+    @include xs {
+        .section__title--left {
+            font-size: 32px;
+        }
+        .section__desc--left {
+            font-size: 13px;
+        }
+    }
+}
+// end main video
+//----------------------------- //
+// about
+.about {
+    .container {
+        @include flexset(true);
+    }
+    &__left {
+        flex-basis: 514px;
+        flex-shrink: 0;
+    }
+    &__img {
+        width: 100%;
+    }
+    &__right {
+        flex-basis: 50%;
+        padding-left: 72px;
+        &--name {
+            position: relative;
+            &::before {
+                @include fakediv(82px, 2px, $black-cl, true);
+                @include transform(translateY(-50%));
+                top: 50%;
+                right: calc(100% + 30px);
+            }
+        }
+        &--desc {
+            max-width: 355px;
+            @include overtext(3);
+        }
+    }
+    @include sm {
+        padding: var(--pd-section-m) 0;
+        .container {
+            flex-direction: column;
+            align-items: unset;
+        }
+        &__left {
+            flex-basis: 100%;
+            flex-shrink: 0;
+        }
+        &__right {
+            flex-basis: 100%;
+            padding-left: 0;
+            margin-top: 40px;
+            &--name {
+                position: relative;
+                &::before {
+                    @include fakediv(82px, 2px, $black-cl, true);
+                    @include transform(translateY(-50%));
+                    top: 50%;
+                    right: calc(100% + 30px);
+                    display: none;
+                }
+            }
+            &--desc {
+                max-width: 100%;
+                @include overtext(3);
+            }
+        }
+    }
+}
+// end about
+//----------------------------- //
+// gallery
+.gallery {
+    background-color: $black-cl;
+    .section__title--left,
+    .section__desc--left {
+        color: $white-cl;
+    }
+    .section__desc--left {
+        max-width: 440px;
+    }
+    &__list {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 210px 210px;
+        grid-gap: 11px;
+        margin-top: 50px;
+    }
+    &__item {
+        cursor: pointer;
+        &:hover .gallery__img {
+            filter: grayscale(0);
+            -webkit-filter: grayscale(0);
+        }
+    }
+    &__item:nth-child(2) {
+        grid-area: 1/2/3/3;
+    }
+    &__img {
+        @include transition($t);
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: grayscale(100%);
+        -webkit-filter: grayscale(100%);
+    }
+    @include xs {
+        &__list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 210px 210px;
+            grid-gap: 11px;
+            margin-top: 50px;
+        }
+    }
+}
+// end gallery
+//----------------------------- //
+// news
+.news {
+    .section__desc--left {
+        max-width: 440px;
+    }
+    .tabs__list {
+        @include flexnomid;
+        margin-top: 40px;
+        @include text(16px, pb, 0, $gold-cl, uppercase);
+        .tab {
+            padding: 15px;
+            border: 3px solid $text-cl;
+            @include flexnomid;
+            @include transition($t);
+            cursor: pointer;
+            &.active,
+            &:hover {
+                background-color: $gold-cl;
+                color: $white-cl;
+                @include transition($t);
+            }
+            &:nth-child(2) {
+                margin-left: 20px;
+            }
+        }
+    }
+    &__list {
+        margin: 0 -15px;
+        display: none;
+        margin-top: 45px;
+        flex-wrap: wrap;
+        @include transition($t);
+        &.active {
+            display: flex;
+            @include transition($t);
+        }
+    }
+    &__item {
+        width: calc(100% / 3);
+        padding: 0 15px;
+        &:hover .news__content::before {
+            width: 82px;
+        }
+        &:hover .news__title {
+            color: $gold-cl;
+        }
+    }
+    &__package {
+        width: 100%;
+        height: 0;
+        padding-bottom: 65%;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+    }
+    &__img {
+        width: 100%;
+        height: 100%;
+        @include mid(false);
+        @include transition($t);
+        &:hover {
+            @include transform(translate(-50%, -50%) scale(1.2));
+        }
+        object-fit: cover;
+    }
+    &__content {
+        margin-top: 22px;
+        &:before {
+            @include fakediv(0px, 2px, $gold-cl, false);
+            @include transition($t);
+            margin-bottom: 22px;
+        }
+    }
+    &__title {
+        @include text(18px, pb, 24px, $black-cl, uppercase);
+        @include transition($t);
+        text-decoration: none;
+        h3 {
+            @include overtext(2);
+            height: 48px;
+        }
+    }
+    &__desc {
+        @include overtext(3);
+    }
+    @include sm {
+        &__list {
+            margin-top: 25px;
+        }
+        &__content {
+            &::before {
+                width: 82px;
+            }
+        }
+    }
+    @include xs {
+        padding-top: var(--pd-section-m);
+        padding-bottom: 0;
+        &__list {
+            margin: 20px 0;
+        }
+        &__content {
+            &::before {
+                width: 82px;
+            }
+        }
+        &__item {
+            width: 100%;
+            padding: 20px 0;
+            &:last-child {
+                padding-top: 20px;
+                padding-bottom: 0;
+            }
+            &:hover .news__content::before {
+                width: 82px;
+            }
+            &:hover .news__title {
+                color: $gold-cl;
+            }
+        }
+        .news__title h3 {
+            height: unset;
+        }
+    }
+}
+// End news
+//----------------------------- //
+// footer Slider
+.footer__slider {
+    // @include flexaround;
+    .item {
+        height: 335px;
+        position: relative;
+        overflow: hidden;
+        img {
+            object-fit: cover;
+            height: 100%;
+        }
+    }
+    .drag {
+        @include mid(true);
+        align-items: center;
+        flex-direction: column;
+        margin-top: 30px;
+        &__text {
+            @include text(16px, pb, unset, $black-cl, uppercase);
+            letter-spacing: 4px;
+        }
+        &__line {
+            margin-top: 10px;
+            width: 400px;
+            height: 3px;
+            .line {
+                width: 0%;
+                height: 100%;
+                background-color: $gold-cl;
+                border-radius: 4px;
+            }
+        }
+    }
+    @include sm {
+        .item {
+            width: 50%;
+            height: 200px;
+        }
+        img {
+            width: 100%;
+        }
+    }
+}
+
+// End footer Slider
+//
+// Bonus
+
+.faq {
+    .section__desc--left {
+        max-width: 440px;
+    }
+    .list {
+        margin-top: 20px;
+    }
+    .item {
+        width: 600px;
+        margin-top: 30px;
+
+        &__title {
+            @include text(18px, pb, unset, $black-cl, uppercase);
+        }
+        &.active {
+            .main {
+                background-color: $gold-cl;
+                @include transition($t);
+                .icon__more {
+                    background-color: $white-cl;
+                    transform: rotate(45deg);
+                    &::after {
+                        background-color: $white-cl;
+                    }
+                }
+                .item__title {
+                    color: $white-cl;
+                }
+            }
+            .sub-desc {
+                padding: 15px;
+                max-height: 150px;
+                border: 1px solid #ccc;
+            }
+        }
+    }
+    @include sm {
+        padding-bottom: var(--pd-section-m);
+        .item {
+            width: unset;
+        }
+    }
+}
+.main {
+    @include transition($t);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: $white-cl;
+    padding: 15px;
+    position: relative;
+    border: 1px solid #ccc;
+    .icon {
+        padding: 10px;
+        cursor: pointer;
+    }
+    .icon__more {
+        width: 20px;
+        height: 2px;
+        background-color: black;
+        position: relative;
+        @include transition($t);
+        cursor: pointer;
+        &:after {
+            @include fakediv(20px, 2px, $black-cl, true);
+            @include transition($t);
+            left: 50%;
+            transform: translateX(-50%) rotate(90deg);
+        }
+    }
+}
+.sub-desc {
+    background-color: $white-cl;
+    overflow: hidden;
+    padding: 0 15px;
+    max-height: 0;
+    transition: 0.3s;
+}
+// bonus toTop
+.backtotop {
+    @include transition($t);
+    @include mid(true);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+
+    flex-direction: column-reverse;
+    position: fixed;
+    right: 20px;
+    bottom: 30%;
+    z-index: 101;
+    cursor: pointer;
+    background-color: $white-cl;
+    display: none;
+    mix-blend-mode: difference;
+    &:hover {
+        background: $gold-cl;
+        @include transition($t);
+        color: white;
+    }
+    p {
+        @include text(18px, pb, unset, $black-cl, uppercase);
+        margin-right: 5px;
+    }
+    img {
+        transform: rotate(270deg);
+        filter: invert(1);
+    }
+    @include sm {
+        width: 50px;
+        height: 50px;
+        right: 10px;
+        p {
+            font-size: 16px;
+        }
+        img {
+            display: none;
+        }
+    }
+    @include xs {
+        right: 5px;
+    }
+}
+
+.slider .flickity-viewport {
+    height: 100% !important;
+}
